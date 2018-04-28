@@ -58,7 +58,7 @@ gamelist = pullGamesInCommonFromDiscordIDs(100,['227581562345095168','1129738234
 
 ## Discord-py example:
 
-```
+```python
     @commands.command(pass_context=True, no_pm=True)  
     async def game(self, ctx):  
         """Lists games in common"""  
@@ -70,7 +70,7 @@ gamelist = pullGamesInCommonFromDiscordIDs(100,['227581562345095168','1129738234
         for member in mentionList:  
             mentionIDList.append(str(member.id))  
   
-  
+        from steamgamesv2 import pullGamesInCommonFromDiscordIDs
         game = pullGamesInCommonFromDiscordIDs(100,mentionIDList)  
         games = str(game).replace('\'', '').strip('[').strip(']')  
         for x in range(0,int(len(games)/1998)+1):  
