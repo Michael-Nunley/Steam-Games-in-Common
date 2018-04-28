@@ -84,7 +84,6 @@ def findGamesInCommon(percentCutoff,*steamids):
         gameNameListIncommon.append(name)
 
     return gameNameListIncommon
-    #return gameIDsThatPassCutoff
 
 def pullGamesInCommonFromDiscordIDs(percentCutoff,*mentionIDs):
     steamIDS = []
