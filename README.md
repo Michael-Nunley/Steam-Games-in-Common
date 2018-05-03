@@ -26,7 +26,7 @@ gamelist = findGamesInCommon(65, '76561197997457199','76561198022367213','765611
 ## Use Method #2: Discord ID
 
 Copy the discord ID's of the users you want,  
-![Right-click a discord user and click copy id to copy their discord id to your clipboard.](https://i.imgur.com/MbYZ3ZI.png)  
+![Right-click a discord user and click copy id to copy their discord id to your clipboard.](https://i.imgur.com/LlLzwSR.png)  
 and in discordSteamIDlink.json put in their discord id linked to thier steam id in this format:
 
 ``` JSON
