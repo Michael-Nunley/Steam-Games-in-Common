@@ -10,7 +10,7 @@ If you do not already have one, you get receive an api key from [https://steamc
 ## Use Method #1: Steam ID
 
 ``` python
-steamidlist = ['76561197997457199','76561198022367213','76561198041510733']      
+steamidlist = ['STEAMIDXXXXXXXXXX','STEAMIDXXXXXXXXXX','STEAMIDXXXXXXXXXX']      
 percentCutoff = 100      
 gamelist = findGamesInCommon(percentCutoff, steamidlist)  
 
@@ -19,7 +19,7 @@ gamelist = findGamesInCommon(percentCutoff, steamidlist)
 Alternatively,
 
 ``` python
-gamelist = findGamesInCommon(65, '76561197997457199','76561198022367213','76561198041510733')  
+gamelist = findGamesInCommon(65, 'STEAMIDXXXXXXXXXX','STEAMIDXXXXXXXXXX','STEAMIDXXXXXXXXXX')  
 
 ```
 
@@ -35,7 +35,7 @@ and in discordSteamIDlink.json put in their discord id linked to thier steam id 
   "userIDs":      
   {      
     "DISCORDXXXXXXXXXXX":"STEAMIDXXXXXXXXXX",      
-    "227581562345095168":"76561198022367213"      
+    "227581562345095000":"76561198022367000"      
   }      
 }  
 
@@ -44,7 +44,7 @@ and in discordSteamIDlink.json put in their discord id linked to thier steam id 
 Finally, you can call `pullGamesInCommonFromDiscordIDs` with a number from 0-100 and either a list of the ids (see the file for this example) or with arguments of the discord ids as strings.
 
 ``` python
-mentionedIDList = ['227581562345095168','112973823447470080','105055491113099264']    
+mentionedIDList = ['DISCORDXXXXXXXXXXX','DISCORDXXXXXXXXXXX','DISCORDXXXXXXXXXXX']    
 percentCutoff = 75    
 gamelist = pullGamesInCommonFromDiscordIDs(percentCutoff,mentionedIDList)  
 
@@ -53,7 +53,7 @@ gamelist = pullGamesInCommonFromDiscordIDs(percentCutoff,mentionedIDList)
 Alternatively:
 
 ``` python
-gamelist = pullGamesInCommonFromDiscordIDs(100,['227581562345095168','112973823447470080','105055491113099264'])  
+gamelist = pullGamesInCommonFromDiscordIDs(100,['DISCORDXXXXXXXXXXX','DISCORDXXXXXXXXXXX','DISCORDXXXXXXXXXXX'])  
 
 ```
 
