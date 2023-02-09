@@ -8,12 +8,10 @@ def getSteamWebAPIID ():
         return re.sub(r'\W+', '', data[0])
 
 def getSteamLibrary(*steamids):
-    superIDDictu = {}
-    superIDDict = {}
-    superIDLogoDictu = {}
-    superIDLogoDict = {}
+    superIDDict = {} #dict of all games in all libraries
+    superIDLogoDict = {} #dict of all game logos in all libraries
     games = []
-    formatedgames = []
+    formatedgames = [] #list of lists of games in each library
 
     user = 0
     for steamid in steamids:
@@ -23,18 +21,17 @@ def getSteamLibrary(*steamids):
         idlist = []
         for _message in tree["response"]["games"]:
             idlist.append(int(_message["appid"]))
-            superIDDictu[_message["name"]] = int(_message["appid"])
-            superIDLogoDictu[int(_message["appid"])] = _message["img_icon_url"]
+            superIDDict[_message["name"]] = int(_message["appid"])
+            superIDLogoDict[int(_message["appid"])] = _message["img_icon_url"]
 
         sortedids = sorted(idlist, key=int)
         games.append([user,sortedids])
         user += 1
 
-    import operator
-    superIDDict = sorted(superIDDictu.items(),key=operator.itemgetter(1))
+    import operator #sort dict by value
+    superIDDict = sorted(superIDDict.items(),key=operator.itemgetter(1))
 
 
-    childcount = 0
     for child in games:
         childgames = []
         for gameid in superIDDict:
@@ -49,23 +46,21 @@ def getSteamLibrary(*steamids):
             else:
                 childgames.append(None)
 
-        childcount += 1
         formatedgames.append(childgames)
-    returnobject = [formatedgames, superIDDict, superIDLogoDict]
-    return returnobject
+    return [formatedgames, superIDDict, superIDLogoDict]
 
 def findGamesInCommon(percentCutoff,*steamids):
-    libraries = getSteamLibrary(*steamids)
-    playergames = libraries[0]
-    superid = libraries[1]
+    libraries = getSteamLibrary(*steamids) #returns [formatedgames, superIDDict, superIDLogoDict]
+    playergames = libraries[0] #list of lists of games in each library
+    superid = libraries[1] #dict of all games in all libraries
 
-    gameNameListIncommon = []
+    gameNameListIncommon = [] #list of games in common
 
-    cutoff = percentCutoff/100
-    gameIDsThatPassCutoff = []
+    cutoff = percentCutoff/100 #convert percent to decimal
+    gameIDsThatPassCutoff = [] #list of games that pass the cutoff
 
-    gamesInCommonPercentage = [None] * (len(superid))
-    gamesInCommonCount = []
+    gamesInCommonPercentage = [None] * (len(superid)) #list of percentages of games in common
+    gamesInCommonCount = [] #list of counts of games in common
     for x in range(0,(len(superid))):
         gamesInCommonCount.append(int(0))
 
@@ -79,8 +74,7 @@ def findGamesInCommon(percentCutoff,*steamids):
         if ((gamesInCommonCount[count]/max(gamesInCommonCount)) >= cutoff):
             gameIDsThatPassCutoff.append(superid[count])
 
-    for _id in gameIDsThatPassCutoff:
-        name = _id[0]
+        name = gameIDsThatPassCutoff[count][0]
         gameNameListIncommon.append(name)
 
     return gameNameListIncommon
@@ -104,7 +98,3 @@ def getSteamIDfromDiscordID(*mentionIDs):
         steamIDs.append(mdata[mention])
 
     return steamIDs
-
-mentionedIDList = ['227581562345095168','112973823447470080','105055491113099264']
-games = pullGamesInCommonFromDiscordIDs(100,mentionedIDList)
-print(games)
